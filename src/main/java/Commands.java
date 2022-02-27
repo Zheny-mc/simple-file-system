@@ -9,7 +9,7 @@ public interface Commands {
 	String CREATE_FILE = "touch";
 	String DELETE_FILE = "rm";
 	String COPY_FILE = "cp";
-	String RENAME_FILE = "ls";
+	String RENAME_FILE = "mv";
 
 	String EXIT = "exit";
 }

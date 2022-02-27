@@ -7,9 +7,8 @@ public class Main {
 		FileManager fileManager =
 				new FileManager("E:\\labs\\course_work_SPS\\simple_file_system\\root");
 
-		System.out.println("welcome to the console");
+		System.out.print("welcome to the console\n$ ");
 		String input = scaner.nextLine();
-
 
 		while(!input.equals(Commands.EXIT)) {
 			String token[] = input.split(" ");
@@ -27,16 +26,31 @@ public class Main {
 					String destFileName = token[2];
 					fileManager.copyFile(sourceFileName, destFileName);
 					break;
-				case Commands.CREATE_FILE:
+				case Commands.CREATE_FILE:{
 					String fileName = token[1];
 					fileManager.createFile(fileName);
 					break;
+				}
 				case Commands.CHANGE_DIRECTORY:
 					String folderName = token[1];
 					fileManager.changeDirectory(folderName);
 					break;
+				case Commands.CREATE_DIRECTORY:
+					String directoryName = token[1];
+					fileManager.createDirectory(directoryName);
+					break;
+				case Commands.DELETE_FILE:
+					String fileName = token[1];
+					fileManager.deleteFile(fileName);
+					break;
+				case Commands.RENAME_FILE:
+					String oldFileName = token[1];
+					String newFileName = token[2];
+					fileManager.renameFile(oldFileName, newFileName);
+					break;
 			}
 			//---------------ввод следующей команды----------------------
+			System.out.print("$ ");
 			input = scaner.nextLine();
 		}
 

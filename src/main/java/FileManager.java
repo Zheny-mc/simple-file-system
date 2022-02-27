@@ -2,6 +2,9 @@ import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class FileManager {
 	private String root;
@@ -65,6 +68,37 @@ public class FileManager {
 			this.currentFolder = this.currentFolder.substring(0, startLastFolderPosition);
 		} else {
 			this.currentFolder += String.format("\\%s", folderName);
+		}
+	}
+
+	public void createDirectory(String directoryName) {
+		String fileName = this.currentFolder + "\\" + directoryName;
+		Path path = Paths.get(fileName);
+
+		if (!Files.exists(path)) {
+			try {
+				Files.createDirectory(path);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else {
+			System.out.println("Directory already exists");
+		}
+	}
+
+	public void deleteFile(String fileName) {
+		//удаление с использованием полного пути в файлу
+		File file = new File(this.currentFolder + "\\" + fileName);
+		if(!file.delete()){
+			System.out.println("Файл не найден!");
+		}
+	}
+
+	public void renameFile(String oldFileName, String newFileName) {
+		File file = new File(this.currentFolder + "\\" + oldFileName);
+		File newFile = new File(this.currentFolder + "\\" + newFileName);
+		if (!file.renameTo(newFile)) {
+			System.out.println("Файл не был переименован");
 		}
 	}
 }
