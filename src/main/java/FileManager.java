@@ -49,6 +49,7 @@ public class FileManager {
 	}
 
 	public void createFile(String fileName) {
+		//проверка: существует ли файл
 		File file = new File(currentFolder + "\\" + fileName);
 		try {
 			file.createNewFile();
@@ -67,6 +68,7 @@ public class FileManager {
 			int startLastFolderPosition = this.currentFolder.lastIndexOf("\\");
 			this.currentFolder = this.currentFolder.substring(0, startLastFolderPosition);
 		} else {
+			//проверка на существование папки
 			this.currentFolder += String.format("\\%s", folderName);
 		}
 	}
@@ -100,5 +102,34 @@ public class FileManager {
 		if (!file.renameTo(newFile)) {
 			System.out.println("Файл не был переименован");
 		}
+	}
+
+	public void estimationDiskSpaceUsed() {
+		File file = new File(this.root);
+		var usageMemory = FileUtils.sizeOfDirectory(file); // использовано памяти
+		var freeSpace = file.getFreeSpace(); // свободная память
+
+		System.out.println("Total size(bytes) / Space free(bytes) =  " + usageMemory / freeSpace + "%");
+		System.out.println(String.format("%17d / %11d", usageMemory, freeSpace));
+	}
+
+	public void info() {
+		String infomation =
+				"\t CREATE_DIRECTORY = \"mkdir\";\n" +
+				"\t CHANGE_DIRECTORY = \"cd\";\n" +
+				"\n" +
+				"\t LIST_OF_FILES = \"ls\";\n" +
+				"\t LIST_OF_FILES_WITH_SIZE = \"ll\";\n" +
+				"\n" +
+				"\t CREATE_FILE = \"touch\";\n" +
+				"\t DELETE_FILE = \"rm\";\n" +
+				"\t COPY_FILE = \"cp\";\n" +
+				"\t RENAME_FILE = \"mv\";\n" +
+				"\n" +
+				"\t INFO = \"man\";\n" +
+				"\t ESTIMATION_DISK_SPACE_USED = \"df\";\n" +
+				"\t EXIT = \"exit\";";
+
+		System.out.println(infomation);
 	}
 }

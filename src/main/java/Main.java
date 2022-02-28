@@ -48,6 +48,14 @@ public class Main {
 					String newFileName = token[2];
 					fileManager.renameFile(oldFileName, newFileName);
 					break;
+				case Commands.ESTIMATION_DISK_SPACE_USED:
+					fileManager.estimationDiskSpaceUsed();
+					break;
+				case Commands.INFO:
+					fileManager.info();
+					break;
+				default:
+					System.err.println("Команда не существует");
 			}
 			//---------------ввод следующей команды----------------------
 			System.out.print("$ ");

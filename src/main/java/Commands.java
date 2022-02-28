@@ -11,5 +11,7 @@ public interface Commands {
 	String COPY_FILE = "cp";
 	String RENAME_FILE = "mv";
 
+	String INFO = "man";
+	String ESTIMATION_DISK_SPACE_USED = "df";
 	String EXIT = "exit";
 }
